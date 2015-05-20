@@ -1,0 +1,35 @@
+# $1 is physical network
+# $2 is bridge
+# $3 is the eth port on the ovs network
+# $4 is the ip address of the resultant port
+echo $1
+echo $2
+echo $3
+echo $4
+ovs-vsctl add-br $2
+# ovs-vsctl add-port $2 $1
+mypath="/etc/sysconfig/network-scripts/ifcfg-$2"
+cp /dev/null $mypath
+echo "DEVICE=$2"      		 >> $mypath
+echo "ONBOOT=yes" 		 >> $mypath
+echo "DEVICETYPE=ovs"		 >> $mypath
+echo "TYPE=OVSBridge"		 >> $mypath
+echo "HOTPLUG=no"                >> $mypath
+echo "USERCTL=no"		 >> $mypath
+
+mypath="/etc/sysconfig/network-scripts/ifcfg-$3"
+cp /dev/null $mypath
+echo "DEVICE=$3"		 >> $mypath
+echo "ONBOOT=yes"		 >> $mypath
+echo "DEVICETYPE=ovs"		 >> $mypath
+echo "TYPE=OVSIntPort"		 >> $mypath
+echo "OVS_BRIDGE=$2"		 >> $mypath
+echo "USERCTL=no"		 >> $mypath
+echo "BOOTPROTO=none"		 >> $mypath
+echo "HOTPLUG=no"		 >> $mypath
+echo "IPADDR=$4"		 >> $mypath
+echo "NETMASK=255.255.255.0"	 >> $mypath
+#echo "GATEWAY=W.X.Y.Z
+#DNS1=P.Q.R.S
+ifup $3
+ovs-vsctl add-port $2 $3 -- set interface $3 type=internal

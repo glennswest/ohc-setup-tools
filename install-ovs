@@ -1,0 +1,14 @@
+# From https://n40lab.wordpress.com/2015/01/25/centos-7-installing-openvswitch-2-3-1-lts/
+yum -y install wget openssl-devel gcc make python-devel openssl-devel kernel-devel graphviz kernel-debug-devel autoconf automake rpm-build redhat-rpm-config libtool
+adduser ovs
+cp build-ovs /home/ovs/build-ovs
+chown ovs /home/ovs/build-ovs
+su - ovs -c /home/ovs/build-ovs
+yum -y localinstall /home/ovs/rpmbuild/RPMS/x86_64/openvswitch-2.3.1-1.x86_64.rpm 
+yum -y install policycoreutils-python
+mkdir /etc/openvswitch
+semanage fcontext -a -t openvswitch_rw_t "/etc/openvswitch(/.*)?"
+restorecon -Rv /etc/openvswitch
+systemctl start openvswitch.service
+chkconfig openvswitch on
+

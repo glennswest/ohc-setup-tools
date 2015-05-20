@@ -1,0 +1,14 @@
+mkdir -p ~/rpmbuild/SOURCES
+
+wget http://openvswitch.org/releases/openvswitch-2.3.1.tar.gz
+
+cp openvswitch-2.3.1.tar.gz ~/rpmbuild/SOURCES/
+
+tar xfz openvswitch-2.3.1.tar.gz
+
+sed 's/openvswitch-kmod, //g' openvswitch-2.3.1/rhel/openvswitch.spec > openvswitch-2.3.1/rhel/openvswitch_no_kmod.spec
+
+rpmbuild -bb --nocheck ~/openvswitch-2.3.1/rhel/openvswitch_no_kmod.spec
+
+exit
+

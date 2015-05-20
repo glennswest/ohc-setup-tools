@@ -1,0 +1,16 @@
+# Get our main interface
+ifacename="$(ip -o -4 r s to default | grep ^default | awk '{print $5}')"
+./setup-bridge-port ${ifacename} ovsbr0 ethovs0 10.128.1.254
+./setup-bridge-port ${ifacename} ovsbr1 ethovs1 10.128.2.254
+./setup-bridge-port ${ifacename} ovsbr2 ethovs2 10.128.3.254
+./setup-bridge-port ${ifacename} ovsbr3 ethovs3 10.128.4.254
+./setup-bridge-port ${ifacename} ovsbr4 ethovs4 10.128.5.254
+./setup-bridge-port ${ifacename} ovsbr5 ethovs5 10.128.6.254
+./setup-bridge-port ${ifacename} ovsbr6 ethovs6 10.128.7.254
+./setup-bridge-port ${ifacename} ovsbr7 ethovs7 10.128.8.254
+mypath="/etc/sysctl.d/1-ip_forward.conf"
+cp /dev/null $mypath
+echo "# allow IPV4 Forwarding" >> $mypath
+echo "net.ipv4.ip_forward = 1" >> $mypath
+sysctl -p
+

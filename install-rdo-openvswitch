@@ -1,0 +1,4 @@
+yum install http://ftp.linux.ncsu.edu/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
+yum install https://repos.fedorapeople.org/repos/openstack/openstack-kilo/rdo-release-kilo-1.noarch.rpm
+yum install openvswitch
+
