@@ -8,6 +8,8 @@ ifacename="$(ip -o -4 r s to default | grep ^default | awk '{print $5}')"
 ./setup-bridge-port ${ifacename} ovsbr5 ethovs5 10.128.6.254
 ./setup-bridge-port ${ifacename} ovsbr6 ethovs6 10.128.7.254
 ./setup-bridge-port ${ifacename} ovsbr7 ethovs7 10.128.8.254
+./setup-bridge-port ${ifacename} rhevmbr rhevm 10.128.9.254
+./setup-bridge-port ${ifacename} docker0 ethdocker0 10.129.0.1
 mypath="/etc/sysctl.d/1-ip_forward.conf"
 cp /dev/null $mypath
 echo "# allow IPV4 Forwarding" >> $mypath

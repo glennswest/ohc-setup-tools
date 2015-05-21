@@ -1,9 +1,10 @@
 #subscription-manager subscribe 
-subscription-manager attach --pool=8a85f98146a087b80146a9b32b874d7f
-yum update -y
-subscription-manager repos --enable=rhel-7-server-rpms
-subscription-manager repos --enable=rhel-7-server-optional-rpms
-subscription-manager repos --enable=rhel-7-server-supplementary-rpms
-subscription-manager repos --enable=rhel-7-server-rhev-mgmt-agent-rpms
-#yum -y install ovirt-hosted-engine-setup
+#subscription-manager attach --pool=8a85f98146a087b80146a9b32b874d7f
+#yum update -y
+#subscription-manager repos --enable=rhel-7-server-rpms
+#subscription-manager repos --enable=rhel-7-server-optional-rpms
+#subscription-manager repos --enable=rhel-7-server-supplementary-rpms
+#subscription-manager repos --enable=rhel-7-server-rhev-mgmt-agent-rpms
+setup-bridges
+yum -y install ovirt-hosted-engine-setup
 
